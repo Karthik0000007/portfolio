@@ -7,7 +7,7 @@
     <meta name="description" content="Software Engineer building reliable AI-driven backend systems. Focus on data pipelines, ML-integrated services, observability, and failure-aware design.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         /* ===== RESET & TOKENS ===== */
@@ -89,9 +89,25 @@
         }
 
         .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-weight: 700;
             font-size: 17px;
             letter-spacing: -0.02em;
+        }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+            transition: border-color var(--transition);
+        }
+
+        .nav-brand:hover .nav-avatar {
+            border-color: var(--accent);
         }
 
         .nav-links {
@@ -860,6 +876,48 @@
             .fade-up { opacity: 1; transform: none; transition: none; }
             .hero-badge .dot { animation: none; }
         }
+
+        /* ===== LANGUAGE TOGGLE ===== */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2px;
+            margin-left: 12px;
+        }
+        .lang-toggle button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            line-height: 1.4;
+        }
+        .lang-toggle button.active {
+            background: var(--accent);
+            color: #fff;
+        }
+        .lang-toggle button:hover:not(.active) {
+            color: var(--text);
+        }
+        html[lang="ja"] body {
+            font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        @media (max-width: 768px) {
+            .lang-toggle {
+                position: absolute;
+                right: 56px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
     </style>
 </head>
 <body>
@@ -869,15 +927,22 @@
     <!-- ===== NAVIGATION ===== -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
-            <a href="#" class="nav-brand">MSK</a>
+            <a href="#" class="nav-brand">
+                <img src="Gemini_Generated_Image_twh27btwh27btwh2.png" alt="MSK" class="nav-avatar" width="32" height="32">
+                MSK
+            </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#philosophy">Philosophy</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#projects" data-i18n="nav-projects">Projects</a></li>
+                <li><a href="#philosophy" data-i18n="nav-philosophy">Philosophy</a></li>
+                <li><a href="#experience" data-i18n="nav-experience">Experience</a></li>
+                <li><a href="#skills" data-i18n="nav-skills">Skills</a></li>
+                <li><a href="#about" data-i18n="nav-about">About</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
             </ul>
+            <div class="lang-toggle" role="radiogroup" aria-label="Language">
+                <button id="langEn" class="active" role="radio" aria-checked="true">EN</button>
+                <button id="langJp" role="radio" aria-checked="false">JP</button>
+            </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
@@ -894,21 +959,21 @@
                     <div class="hero-content">
                         <div class="hero-badge">
                             <span class="dot"></span>
-                            Open to opportunities
+                            <span data-i18n="hero-badge">Open to opportunities</span>
                         </div>
                         <h1>Malladi Sairam<br>Karthik</h1>
-                        <p class="subtitle">Software Engineer building reliable AI-driven systems. I design backend infrastructure, data pipelines, and ML-integrated services that prioritize observability, failure handling, and real-world constraints.</p>
+                        <p class="subtitle" data-i18n="hero-subtitle">Software Engineer building reliable AI-driven systems. I design backend infrastructure, data pipelines, and ML-integrated services that prioritize observability, failure handling, and real-world constraints.</p>
                         <div class="hero-tags">
-                            <span class="hero-tag">Backend Systems</span>
-                            <span class="hero-tag">Data Pipelines</span>
-                            <span class="hero-tag">ML Infrastructure</span>
-                            <span class="hero-tag">Failure-Aware Design</span>
+                            <span class="hero-tag" data-i18n="tag-backend">Backend Systems</span>
+                            <span class="hero-tag" data-i18n="tag-pipeline">Data Pipelines</span>
+                            <span class="hero-tag" data-i18n="tag-ml">ML Infrastructure</span>
+                            <span class="hero-tag" data-i18n="tag-failure">Failure-Aware Design</span>
                         </div>
                         <div class="hero-actions">
                             <a href="#contact" class="btn btn-fill">
-                                <i class="fas fa-paper-plane"></i> Get in Touch
+                                <i class="fas fa-paper-plane"></i> <span data-i18n="btn-contact">Get in Touch</span>
                             </a>
-                            <a href="#projects" class="btn btn-outline">
+                            <a href="#projects" class="btn btn-outline" data-i18n="btn-projects">
                                 View Systems I've Built
                             </a>
                             <a href="https://github.com/Karthik0000007" target="_blank" class="btn btn-ghost" aria-label="GitHub Profile">
@@ -927,25 +992,25 @@
         <section id="philosophy" class="section">
             <div class="container">
                 <div class="section-header fade-up">
-                    <span class="section-label">How I Build</span>
-                    <h2 class="section-title">Engineering Philosophy</h2>
+                    <span class="section-label" data-i18n="phi-label">How I Build</span>
+                    <h2 class="section-title" data-i18n="phi-title">Engineering Philosophy</h2>
                 </div>
 
                 <div class="philosophy-grid fade-up">
                     <div class="philosophy-card">
                         <div class="phi-icon reliability"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Reliability before Intelligence</h3>
-                        <p>If a model cannot be monitored, versioned, and rolled back safely, it does not belong in production. Observability and operational safety come first — accuracy follows.</p>
+                        <h3 data-i18n="phi-1-title">Reliability before Intelligence</h3>
+                        <p data-i18n="phi-1-body">If a model cannot be monitored, versioned, and rolled back safely, it does not belong in production. Observability and operational safety come first — accuracy follows.</p>
                     </div>
                     <div class="philosophy-card">
                         <div class="phi-icon tradeoffs"><i class="fas fa-balance-scale"></i></div>
-                        <h3>Trade-offs are Explicit</h3>
-                        <p>Every system balances latency, cost, accuracy, and operational complexity. I document constraints, evaluate alternatives, and design around known boundaries — not assumptions.</p>
+                        <h3 data-i18n="phi-2-title">Trade-offs are Explicit</h3>
+                        <p data-i18n="phi-2-body">Every system balances latency, cost, accuracy, and operational complexity. I document constraints, evaluate alternatives, and design around known boundaries — not assumptions.</p>
                     </div>
                     <div class="philosophy-card">
                         <div class="phi-icon failure"><i class="fas fa-exclamation-triangle"></i></div>
-                        <h3>Failure is Assumed</h3>
-                        <p>Retries, dead-letter queues, fallback logic, health checks, and structured metrics are built-in — not afterthoughts. Systems degrade gracefully or they fail unpredictably.</p>
+                        <h3 data-i18n="phi-3-title">Failure is Assumed</h3>
+                        <p data-i18n="phi-3-body">Retries, dead-letter queues, fallback logic, health checks, and structured metrics are built-in — not afterthoughts. Systems degrade gracefully or they fail unpredictably.</p>
                     </div>
                 </div>
             </div>
@@ -955,41 +1020,41 @@
         <section id="projects" class="section">
             <div class="container">
                 <div class="section-header fade-up">
-                    <span class="section-label">Systems I've Built</span>
-                    <h2 class="section-title">Projects</h2>
-                    <p class="section-subtitle">Production-oriented systems with documented trade-offs and measurable outcomes.</p>
+                    <span class="section-label" data-i18n="proj-label">Systems I've Built</span>
+                    <h2 class="section-title" data-i18n="proj-title">Projects</h2>
+                    <p class="section-subtitle" data-i18n="proj-subtitle">Production-oriented systems with documented trade-offs and measurable outcomes.</p>
                 </div>
 
                 <!-- Project 1: Event Analytics Platform -->
                 <div class="projects-grid">
                     <article class="project-card fade-up">
                         <div class="project-top">
-                            <h3>Event Analytics Platform — Event-Driven Ingestion Pipeline with Failure Isolation</h3>
+                            <h3 data-i18n="p1-title">Event Analytics Platform — Event-Driven Ingestion Pipeline with Failure Isolation</h3>
                         </div>
-                        <p class="project-context">Personal Project · Go + Kafka + PostgreSQL</p>
-                        <p class="project-description">Production-grade event-driven data ingestion pipeline designed for correctness under failure. Implements at-least-once delivery with idempotent persistence, intelligent error classification, bounded retry with exponential backoff, and dead-letter queue isolation — all with manual Kafka offset control for crash-safe guarantees.</p>
+                        <p class="project-context" data-i18n="p1-ctx">Personal Project · Go + Kafka + PostgreSQL</p>
+                        <p class="project-description" data-i18n="p1-desc">Production-grade event-driven data ingestion pipeline designed for correctness under failure. Implements at-least-once delivery with idempotent persistence, intelligent error classification, bounded retry with exponential backoff, and dead-letter queue isolation — all with manual Kafka offset control for crash-safe guarantees.</p>
                         <ul class="project-highlights" style="list-style: disc;">
-                            <li>At-least-once delivery with manual offset commits — offsets committed only after successful DB write or DLQ routing; uncommitted messages redelivered on consumer restart</li>
-                            <li>Idempotent persistence via INSERT ... ON CONFLICT DO NOTHING — duplicate replays are safe by design</li>
-                            <li>Intelligent error classification: transient (exponential backoff + jitter), permanent (immediate DLQ routing), unknown (defaults to transient to avoid data loss)</li>
-                            <li>Dead Letter Queue with full forensic metadata: original key/value/offset, error classification, retry count, failure timestamp</li>
+                            <li data-i18n="p1-h1">At-least-once delivery with manual offset commits — offsets committed only after successful DB write or DLQ routing; uncommitted messages redelivered on consumer restart</li>
+                            <li data-i18n="p1-h2">Idempotent persistence via INSERT ... ON CONFLICT DO NOTHING — duplicate replays are safe by design</li>
+                            <li data-i18n="p1-h3">Intelligent error classification: transient (exponential backoff + jitter), permanent (immediate DLQ routing), unknown (defaults to transient to avoid data loss)</li>
+                            <li data-i18n="p1-h4">Dead Letter Queue with full forensic metadata: original key/value/offset, error classification, retry count, failure timestamp</li>
                         </ul>
                         <div class="project-results">
                             <div class="result-item">
-                                <span class="result-value">27</span>
-                                <span class="result-label">Passing tests</span>
+                                <span class="result-value" data-i18n="p1-rv1">27</span>
+                                <span class="result-label" data-i18n="p1-rl1">Passing tests</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">3</span>
-                                <span class="result-label">Error classes</span>
+                                <span class="result-value" data-i18n="p1-rv2">3</span>
+                                <span class="result-label" data-i18n="p1-rl2">Error classes</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">Crash-safe</span>
-                                <span class="result-label">Shutdown handling</span>
+                                <span class="result-value" data-i18n="p1-rv3">Crash-safe</span>
+                                <span class="result-label" data-i18n="p1-rl3">Shutdown handling</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">At-least-once</span>
-                                <span class="result-label">Delivery guarantee</span>
+                                <span class="result-value" data-i18n="p1-rv4">At-least-once</span>
+                                <span class="result-label" data-i18n="p1-rl4">Delivery guarantee</span>
                             </div>
                         </div>
                         <div class="project-footer">
@@ -1008,32 +1073,32 @@
                     <!-- Project 2: Risk Scoring System -->
                     <article class="project-card fade-up">
                         <div class="project-top">
-                            <h3>Content Risk Scoring Service — Stateless Inference Microservice with Graceful Degradation</h3>
+                            <h3 data-i18n="p2-title">Content Risk Scoring Service — Stateless Inference Microservice with Graceful Degradation</h3>
                         </div>
-                        <p class="project-context">Personal Project · FastAPI + Kubernetes + Prometheus</p>
-                        <p class="project-description">Synchronous text risk scoring microservice serving probabilistic risk scores under strict latency constraints. Model training is offline and versioned; inference is stateless and horizontally scalable. Failures are observable — not silent.</p>
+                        <p class="project-context" data-i18n="p2-ctx">Personal Project · FastAPI + Kubernetes + Prometheus</p>
+                        <p class="project-description" data-i18n="p2-desc">Synchronous text risk scoring microservice serving probabilistic risk scores under strict latency constraints. Model training is offline and versioned; inference is stateless and horizontally scalable. Failures are observable — not silent.</p>
                         <ul class="project-highlights" style="list-style: disc;">
-                            <li>Stateless FastAPI inference service (~10 concurrent requests per pod with predictable latency degradation)</li>
-                            <li>Offline versioned model training decoupled from inference; gated CI/CD pipeline for model releases — no hot-push to production</li>
-                            <li>Model load failures block traffic via Kubernetes readiness probes; runtime inference errors return degraded responses instead of crashing</li>
-                            <li>Full observability: structured logging + Prometheus metrics; all failure modes are instrumented and alertable</li>
+                            <li data-i18n="p2-h1">Stateless FastAPI inference service (~10 concurrent requests per pod with predictable latency degradation)</li>
+                            <li data-i18n="p2-h2">Offline versioned model training decoupled from inference; gated CI/CD pipeline for model releases — no hot-push to production</li>
+                            <li data-i18n="p2-h3">Model load failures block traffic via Kubernetes readiness probes; runtime inference errors return degraded responses instead of crashing</li>
+                            <li data-i18n="p2-h4">Full observability: structured logging + Prometheus metrics; all failure modes are instrumented and alertable</li>
                         </ul>
                         <div class="project-results">
                             <div class="result-item">
-                                <span class="result-value">K8s-native</span>
-                                <span class="result-label">Deployment</span>
+                                <span class="result-value" data-i18n="p2-rv1">K8s-native</span>
+                                <span class="result-label" data-i18n="p2-rl1">Deployment</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">CI/CD gated</span>
-                                <span class="result-label">Model releases</span>
+                                <span class="result-value" data-i18n="p2-rv2">CI/CD gated</span>
+                                <span class="result-label" data-i18n="p2-rl2">Model releases</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">Graceful</span>
-                                <span class="result-label">Degradation</span>
+                                <span class="result-value" data-i18n="p2-rv3">Graceful</span>
+                                <span class="result-label" data-i18n="p2-rl3">Degradation</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">Observable</span>
-                                <span class="result-label">All failure modes</span>
+                                <span class="result-value" data-i18n="p2-rv4">Observable</span>
+                                <span class="result-label" data-i18n="p2-rl4">All failure modes</span>
                             </div>
                         </div>
                         <div class="project-footer">
@@ -1054,32 +1119,32 @@
                     <!-- Project 3: AI Studio Cam -->
                     <article class="project-card fade-up">
                         <div class="project-top">
-                            <h3>AI Studio Cam — Real-Time Vision Service with Semantic Memory &amp; Runtime Model Switching</h3>
+                            <h3 data-i18n="p3-title">AI Studio Cam — Real-Time Vision Service with Semantic Memory &amp; Runtime Model Switching</h3>
                         </div>
-                        <p class="project-context">Research Project · Under Dr. Anirban Bhar</p>
-                        <p class="project-description">Real-time AI-powered visual memory system with dual-model detection, CLIP-based semantic search over a FAISS vector index, and voice-driven interaction. Supports runtime model hot-swapping between YOLOv8 (80+ classes) and custom CNN (10 specialized classes) without service restart.</p>
+                        <p class="project-context" data-i18n="p3-ctx">Research Project · Under Dr. Anirban Bhar</p>
+                        <p class="project-description" data-i18n="p3-desc">Real-time AI-powered visual memory system with dual-model detection, CLIP-based semantic search over a FAISS vector index, and voice-driven interaction. Supports runtime model hot-swapping between YOLOv8 (80+ classes) and custom CNN (10 specialized classes) without service restart.</p>
                         <ul class="project-highlights" style="list-style: disc;">
-                            <li>Dual model support: YOLOv8 for general detection + custom CNN for specialized classes — switchable at runtime without restart</li>
-                            <li>CLIP-based semantic memory with FAISS index: supports natural language queries ("show me something like a red cup") and time-based recall</li>
-                            <li>Full voice interface via Whisper STT + TTS for hands-free operation — object search, snapshot capture, model switching, memory management</li>
-                            <li>CNN training pipeline with Optuna hyperparameter optimization, data augmentation, confusion matrix evaluation, and automated model persistence</li>
+                            <li data-i18n="p3-h1">Dual model support: YOLOv8 for general detection + custom CNN for specialized classes — switchable at runtime without restart</li>
+                            <li data-i18n="p3-h2">CLIP-based semantic memory with FAISS index: supports natural language queries ("show me something like a red cup") and time-based recall</li>
+                            <li data-i18n="p3-h3">Full voice interface via Whisper STT + TTS for hands-free operation — object search, snapshot capture, model switching, memory management</li>
+                            <li data-i18n="p3-h4">CNN training pipeline with Optuna hyperparameter optimization, data augmentation, confusion matrix evaluation, and automated model persistence</li>
                         </ul>
                         <div class="project-results">
                             <div class="result-item">
-                                <span class="result-value">30–70ms</span>
-                                <span class="result-label">Inference latency</span>
+                                <span class="result-value" data-i18n="p3-rv1">30–70ms</span>
+                                <span class="result-label" data-i18n="p3-rl1">Inference latency</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">94%</span>
-                                <span class="result-label">mAP accuracy</span>
+                                <span class="result-value" data-i18n="p3-rv2">94%</span>
+                                <span class="result-label" data-i18n="p3-rl2">mAP accuracy</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">Semantic</span>
-                                <span class="result-label">Visual search</span>
+                                <span class="result-value" data-i18n="p3-rv3">Semantic</span>
+                                <span class="result-label" data-i18n="p3-rl3">Visual search</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">Voice-driven</span>
-                                <span class="result-label">Interaction</span>
+                                <span class="result-value" data-i18n="p3-rv4">Voice-driven</span>
+                                <span class="result-label" data-i18n="p3-rl4">Interaction</span>
                             </div>
                         </div>
                         <div class="project-footer">
@@ -1102,32 +1167,32 @@
                     <!-- Project 5: Japanese Language Trainer -->
                     <article class="project-card fade-up">
                         <div class="project-top">
-                            <h3>Offline AI Japanese Language Trainer — Full-Stack SRS App with Local LLM Tutor</h3>
+                            <h3 data-i18n="p5-title">Offline AI Japanese Language Trainer — Full-Stack SRS App with Local LLM Tutor</h3>
                         </div>
-                        <p class="project-context">Personal Project · FastAPI + PostgreSQL + Ollama</p>
-                        <p class="project-description">Fully offline, privacy-first Japanese language learning application with SM-2 spaced repetition built from scratch, complete JLPT vocabulary/kanji browser (N5–N1), and a 5-mode AI tutor powered by local LLaMA 3.1 70B inference. Zero cloud dependencies — nothing leaves the machine.</p>
+                        <p class="project-context" data-i18n="p5-ctx">Personal Project · FastAPI + PostgreSQL + Ollama</p>
+                        <p class="project-description" data-i18n="p5-desc">Fully offline, privacy-first Japanese language learning application with SM-2 spaced repetition built from scratch, complete JLPT vocabulary/kanji browser (N5–N1), and a 5-mode AI tutor powered by local LLaMA 3.1 70B inference. Zero cloud dependencies — nothing leaves the machine.</p>
                         <ul class="project-highlights" style="list-style: disc;">
-                            <li>SM-2 spaced repetition engine from scratch: Again/Hard/Good/Easy grading, daily new-card caps, streak tracking, mastery progression across all JLPT levels</li>
-                            <li>5-mode AI tutor (TEACH · QUIZ · EXPLAIN · CORRECT · CHAT) — intentionally refuses to simply translate; teaches through interaction</li>
-                            <li>Async FastAPI backend with 15+ RESTful endpoints, SSE-streamed AI responses, Alembic migrations, SQLModel ORM</li>
-                            <li>Offline TTS via Piper for Japanese pronunciation; progress dashboard with 7-day review forecast and per-level mastery metrics</li>
+                            <li data-i18n="p5-h1">SM-2 spaced repetition engine from scratch: Again/Hard/Good/Easy grading, daily new-card caps, streak tracking, mastery progression across all JLPT levels</li>
+                            <li data-i18n="p5-h2">5-mode AI tutor (TEACH · QUIZ · EXPLAIN · CORRECT · CHAT) — intentionally refuses to simply translate; teaches through interaction</li>
+                            <li data-i18n="p5-h3">Async FastAPI backend with 15+ RESTful endpoints, SSE-streamed AI responses, Alembic migrations, SQLModel ORM</li>
+                            <li data-i18n="p5-h4">Offline TTS via Piper for Japanese pronunciation; progress dashboard with 7-day review forecast and per-level mastery metrics</li>
                         </ul>
                         <div class="project-results">
                             <div class="result-item">
-                                <span class="result-value">15+</span>
-                                <span class="result-label">API endpoints</span>
+                                <span class="result-value" data-i18n="p5-rv1">15+</span>
+                                <span class="result-label" data-i18n="p5-rl1">API endpoints</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">SM-2</span>
-                                <span class="result-label">SRS engine</span>
+                                <span class="result-value" data-i18n="p5-rv2">SM-2</span>
+                                <span class="result-label" data-i18n="p5-rl2">SRS engine</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">5 modes</span>
-                                <span class="result-label">AI tutor</span>
+                                <span class="result-value" data-i18n="p5-rv3">5 modes</span>
+                                <span class="result-label" data-i18n="p5-rl3">AI tutor</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-value">Fully offline</span>
-                                <span class="result-label">Architecture</span>
+                                <span class="result-value" data-i18n="p5-rv4">Fully offline</span>
+                                <span class="result-label" data-i18n="p5-rl4">Architecture</span>
                             </div>
                         </div>
                         <div class="project-footer">
@@ -1150,28 +1215,28 @@
         <section id="experience" class="section">
             <div class="container">
                 <div class="section-header fade-up">
-                    <span class="section-label">Background</span>
-                    <h2 class="section-title">Experience & Education</h2>
+                    <span class="section-label" data-i18n="exp-label">Background</span>
+                    <h2 class="section-title" data-i18n="exp-title">Experience & Education</h2>
                 </div>
 
                 <div class="exp-education-grid">
                     <!-- Experience Timeline -->
                     <div class="fade-up">
-                        <h3 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 28px;">Experience</h3>
+                        <h3 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 28px;" data-i18n="exp-sub-label">Experience</h3>
                         <div class="timeline">
                             <div class="timeline-item current">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-header">
-                                    <span class="timeline-role">Research — Constrained RL for Edge Inference</span>
-                                    <span class="timeline-date">Mar – Apr 2026</span>
+                                    <span class="timeline-role" data-i18n="exp1-role">Research — Constrained RL for Edge Inference</span>
+                                    <span class="timeline-date" data-i18n="exp1-date">Mar – Apr 2026</span>
                                 </div>
-                                <div class="timeline-org">Under Dr. Raushan Kumar Singh · SRM University, AP</div>
+                                <div class="timeline-org" data-i18n="exp1-org">Under Dr. Raushan Kumar Singh · SRM University, AP</div>
                                 <div class="timeline-body">
                                     <ul>
-                                        <li>Designed Lyapunov-constrained PPO agent for adaptive compute control on latency-bounded industrial vision pipelines (50ms P99 budget, RTX 3050)</li>
-                                        <li>Three-layer safety architecture: learned RL policy → conformal prediction certificate (distribution-free P99 bounds) → deterministic fallback</li>
-                                        <li>Cascaded YOLOv8-Nano + MobileNetV2-UNet TensorRT pipeline with runtime resolution switching (640/480/320) and conditional segmentation</li>
-                                        <li>Full telemetry: per-frame latency, GPU utilization, drift detection (KS-test + CUSUM), Parquet-based structured logging</li>
+                                        <li data-i18n="exp1-b1">Designed Lyapunov-constrained PPO agent for adaptive compute control on latency-bounded industrial vision pipelines (50ms P99 budget, RTX 3050)</li>
+                                        <li data-i18n="exp1-b2">Three-layer safety architecture: learned RL policy → conformal prediction certificate (distribution-free P99 bounds) → deterministic fallback</li>
+                                        <li data-i18n="exp1-b3">Cascaded YOLOv8-Nano + MobileNetV2-UNet TensorRT pipeline with runtime resolution switching (640/480/320) and conditional segmentation</li>
+                                        <li data-i18n="exp1-b4">Full telemetry: per-frame latency, GPU utilization, drift detection (KS-test + CUSUM), Parquet-based structured logging</li>
                                     </ul>
                                 </div>
                                 <div class="timeline-tags">
@@ -1185,15 +1250,15 @@
                             <div class="timeline-item">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-header">
-                                    <span class="timeline-role">Research Intern — Vision Systems</span>
-                                    <span class="timeline-date">Jun – Aug 2025</span>
+                                    <span class="timeline-role" data-i18n="exp2-role">Research Intern — Vision Systems</span>
+                                    <span class="timeline-date" data-i18n="exp2-date">Jun – Aug 2025</span>
                                 </div>
-                                <div class="timeline-org">AI Studio Cam · Under Dr. Anirban Bhar</div>
+                                <div class="timeline-org" data-i18n="exp2-org">AI Studio Cam · Under Dr. Anirban Bhar</div>
                                 <div class="timeline-body">
                                     <ul>
-                                        <li>Operated latency-constrained vision pipeline with hybrid detection (YOLOv8 + CNN) under <50ms p95 SLA</li>
-                                        <li>Built FAISS-backed retrieval layer with 3ms query latency and graceful degradation on component failure</li>
-                                        <li>Instrumented monitoring: confidence tracking, latency alerting, automated fallback to YOLOv8-only mode</li>
+                                        <li data-i18n="exp2-b1">Operated latency-constrained vision pipeline with hybrid detection (YOLOv8 + CNN) under <50ms p95 SLA</li>
+                                        <li data-i18n="exp2-b2">Built FAISS-backed retrieval layer with 3ms query latency and graceful degradation on component failure</li>
+                                        <li data-i18n="exp2-b3">Instrumented monitoring: confidence tracking, latency alerting, automated fallback to YOLOv8-only mode</li>
                                     </ul>
                                 </div>
                                 <div class="timeline-tags">
@@ -1207,15 +1272,15 @@
                             <div class="timeline-item">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-header">
-                                    <span class="timeline-role">Data Engineering Intern</span>
-                                    <span class="timeline-date">Jun – Jul 2025</span>
+                                    <span class="timeline-role" data-i18n="exp3-role">Data Engineering Intern</span>
+                                    <span class="timeline-date" data-i18n="exp3-date">Jun – Jul 2025</span>
                                 </div>
-                                <div class="timeline-org">NULLCLASS</div>
+                                <div class="timeline-org" data-i18n="exp3-org">NULLCLASS</div>
                                 <div class="timeline-body">
                                     <ul>
-                                        <li>Built streaming data pipeline (Kafka → Spark → PostgreSQL + Redis) with <30s data freshness guarantee</li>
-                                        <li>Designed Redis caching layer: dashboard p95 load dropped from 1.2s to 180ms</li>
-                                        <li>Implemented Kafka replay strategy — recovered 3 hours of metrics after infrastructure failure</li>
+                                        <li data-i18n="exp3-b1">Built streaming data pipeline (Kafka → Spark → PostgreSQL + Redis) with <30s data freshness guarantee</li>
+                                        <li data-i18n="exp3-b2">Designed Redis caching layer: dashboard p95 load dropped from 1.2s to 180ms</li>
+                                        <li data-i18n="exp3-b3">Implemented Kafka replay strategy — recovered 3 hours of metrics after infrastructure failure</li>
                                     </ul>
                                 </div>
                                 <div class="timeline-tags">
@@ -1230,19 +1295,19 @@
 
                     <!-- Education + Awards -->
                     <div class="fade-up">
-                        <h3 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 28px;">Education</h3>
+                        <h3 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 28px;" data-i18n="edu-label">Education</h3>
                         <div class="edu-card">
-                            <h3>B.Tech in Computer Science</h3>
-                            <div class="edu-school">SRM University, AP</div>
-                            <div class="edu-date">Expected 2027 · GPA: 8.68</div>
+                            <h3 data-i18n="edu-degree">B.Tech in Computer Science</h3>
+                            <div class="edu-school" data-i18n="edu-school">SRM University, AP</div>
+                            <div class="edu-date" data-i18n="edu-date">Expected 2027 · GPA: 8.68</div>
                             <ul class="edu-details" style="list-style: disc; padding-left: 18px;">
-                                <li>Focus: Backend Systems, Distributed Computing, Machine Learning, Computer Vision, Systems Design</li>
-                                <li>Ongoing research in Lyapunov-constrained RL for latency-bounded edge inference under Dr. Raushan Kumar Singh</li>
+                                <li data-i18n="edu-d1">Focus: Backend Systems, Distributed Computing, Machine Learning, Computer Vision, Systems Design</li>
+                                <li data-i18n="edu-d2">Ongoing research in Lyapunov-constrained RL for latency-bounded edge inference under Dr. Raushan Kumar Singh</li>
                             </ul>
 
                             <div class="award-item">
-                                <h4><i class="fas fa-trophy"></i> Gold Medal — TOMIDAI Global Sci Frontiers</h4>
-                                <p>University of Toyama, Japan, 2025 — Health-monitoring device with early disease detection capabilities.</p>
+                                <h4><i class="fas fa-trophy"></i> <span data-i18n="award-title">Gold Medal — TOMIDAI Global Sci Frontiers</span></h4>
+                                <p data-i18n="award-desc">University of Toyama, Japan, 2025 — Health-monitoring device with early disease detection capabilities.</p>
                             </div>
                         </div>
                     </div>
@@ -1254,40 +1319,40 @@
         <section id="skills" class="section">
             <div class="container">
                 <div class="section-header fade-up">
-                    <span class="section-label">System Layers</span>
-                    <h2 class="section-title">Skills & Tools</h2>
-                    <p class="section-subtitle">Organized by where they operate in the stack.</p>
+                    <span class="section-label" data-i18n="sk-label">System Layers</span>
+                    <h2 class="section-title" data-i18n="sk-title">Skills & Tools</h2>
+                    <p class="section-subtitle" data-i18n="sk-subtitle">Organized by where they operate in the stack.</p>
                 </div>
 
                 <div class="skills-grid fade-up">
                     <div class="skill-card">
                         <div class="skill-card-icon"><i class="fas fa-layer-group"></i></div>
-                        <h3>Application Layer</h3>
-                        <p>FastAPI, API design, async processing, SSE streaming, idempotency patterns, retry policies, dead-letter queue handling</p>
+                        <h3 data-i18n="sk1-title">Application Layer</h3>
+                        <p data-i18n="sk1-desc">FastAPI, API design, async processing, SSE streaming, idempotency patterns, retry policies, dead-letter queue handling</p>
                     </div>
 
                     <div class="skill-card">
                         <div class="skill-card-icon"><i class="fas fa-database"></i></div>
-                        <h3>Data Layer</h3>
-                        <p>PostgreSQL, Redis, Kafka, FAISS (vector search), MongoDB, SQLModel/Alembic, structured logging, Prometheus, Grafana</p>
+                        <h3 data-i18n="sk2-title">Data Layer</h3>
+                        <p data-i18n="sk2-desc">PostgreSQL, Redis, Kafka, FAISS (vector search), MongoDB, SQLModel/Alembic, structured logging, Prometheus, Grafana</p>
                     </div>
 
                     <div class="skill-card">
                         <div class="skill-card-icon"><i class="fas fa-brain"></i></div>
-                        <h3>ML / AI Layer</h3>
-                        <p>PyTorch, HuggingFace Transformers &amp; Diffusers, CLIP, YOLO, Ollama (local LLM serving), model versioning, RAG pipelines, FAISS retrieval</p>
+                        <h3 data-i18n="sk3-title">ML / AI Layer</h3>
+                        <p data-i18n="sk3-desc">PyTorch, HuggingFace Transformers &amp; Diffusers, CLIP, YOLO, Ollama (local LLM serving), model versioning, RAG pipelines, FAISS retrieval</p>
                     </div>
 
                     <div class="skill-card">
                         <div class="skill-card-icon"><i class="fas fa-server"></i></div>
-                        <h3>Infrastructure</h3>
-                        <p>Docker, Kubernetes, CI/CD pipelines, health/readiness probes, Prometheus metrics, Linux, Git, crash-safe shutdown patterns</p>
+                        <h3 data-i18n="sk4-title">Infrastructure</h3>
+                        <p data-i18n="sk4-desc">Docker, Kubernetes, CI/CD pipelines, health/readiness probes, Prometheus metrics, Linux, Git, crash-safe shutdown patterns</p>
                     </div>
                 </div>
 
                 <div style="margin-top: 24px; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);" class="fade-up">
-                    <h3 style="font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;">Languages</h3>
-                    <p style="font-size: 14px; color: var(--text-secondary);">Python (production-grade) · Go (backend services) · C++ (performance-critical paths) · SQL (analytics & ETL)</p>
+                    <h3 style="font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;" data-i18n="sk-lang-label">Languages</h3>
+                    <p style="font-size: 14px; color: var(--text-secondary);" data-i18n="sk-lang-desc">Python (production-grade) · Go (backend services) · C++ (performance-critical paths) · SQL (analytics & ETL)</p>
                 </div>
             </div>
         </section>
@@ -1296,33 +1361,33 @@
         <section id="about" class="section">
             <div class="container">
                 <div class="section-header fade-up">
-                    <span class="section-label">Who I Am</span>
-                    <h2 class="section-title">About</h2>
+                    <span class="section-label" data-i18n="about-label">Who I Am</span>
+                    <h2 class="section-title" data-i18n="about-title">About</h2>
                 </div>
 
                 <div class="about-grid fade-up">
                     <div class="about-text">
-                        <p>I build ML-integrated systems that work under real-world constraints — latency budgets, limited compute, failure modes, and operational complexity. My focus areas span backend infrastructure, real-time inference pipelines, and adaptive compute control, with applications in industrial vision and edge AI.</p>
-                        <p>I believe in engineering-first thinking: understanding trade-offs, documenting decisions, and building for production from day one. Every project I take on starts with the question — "how does this fail, and what happens when it does?"</p>
-                        <p>Currently pursuing my B.Tech at SRM University, AP, while researching Lyapunov-constrained reinforcement learning for latency-bounded edge inference under Dr. Raushan Kumar Singh. I was awarded the Gold Medal at the TOMIDAI Global Sci Frontiers Workshop (University of Toyama, Japan) for a health-monitoring device with early disease detection.</p>
+                        <p data-i18n="about-p1">I build ML-integrated systems that work under real-world constraints — latency budgets, limited compute, failure modes, and operational complexity. My focus areas span backend infrastructure, real-time inference pipelines, and adaptive compute control, with applications in industrial vision and edge AI.</p>
+                        <p data-i18n="about-p2">I believe in engineering-first thinking: understanding trade-offs, documenting decisions, and building for production from day one. Every project I take on starts with the question — "how does this fail, and what happens when it does?"</p>
+                        <p data-i18n="about-p3">Currently pursuing my B.Tech at SRM University, AP, while researching Lyapunov-constrained reinforcement learning for latency-bounded edge inference under Dr. Raushan Kumar Singh. I was awarded the Gold Medal at the TOMIDAI Global Sci Frontiers Workshop (University of Toyama, Japan) for a health-monitoring device with early disease detection.</p>
                     </div>
 
                     <div class="about-interests">
                         <div class="interest-item">
                             <div class="interest-icon"><i class="fas fa-flask"></i></div>
-                            <span><strong>Research:</strong> Safe RL, constrained optimization, edge inference, adaptive compute control</span>
+                            <span><strong data-i18n="about-i1-label">Research:</strong> <span data-i18n="about-i1-text">Safe RL, constrained optimization, edge inference, adaptive compute control</span></span>
                         </div>
                         <div class="interest-item">
                             <div class="interest-icon"><i class="fas fa-language"></i></div>
-                            <span><strong>Languages:</strong> Preparing for JLPT N2 (Japanese)</span>
+                            <span><strong data-i18n="about-i2-label">Languages:</strong> <span data-i18n="about-i2-text">Preparing for JLPT N2 (Japanese)</span></span>
                         </div>
                         <div class="interest-item">
                             <div class="interest-icon"><i class="fas fa-robot"></i></div>
-                            <span><strong>Interests:</strong> Japan's AI & robotics ecosystem, cross-cultural tech collaboration</span>
+                            <span><strong data-i18n="about-i3-label">Interests:</strong> <span data-i18n="about-i3-text">Japan's AI & robotics ecosystem, cross-cultural tech collaboration</span></span>
                         </div>
                         <div class="interest-item">
                             <div class="interest-icon"><i class="fas fa-cogs"></i></div>
-                            <span><strong>Approach:</strong> Production-first mindset, design docs, trade-off analysis</span>
+                            <span><strong data-i18n="about-i4-label">Approach:</strong> <span data-i18n="about-i4-text">Production-first mindset, design docs, trade-off analysis</span></span>
                         </div>
                     </div>
                 </div>
@@ -1333,9 +1398,9 @@
         <section id="contact" class="section contact-section">
             <div class="container">
                 <div class="section-header fade-up">
-                    <span class="section-label">Let's Connect</span>
-                    <h2 class="section-title">Contact</h2>
-                    <p class="section-subtitle">Open to backend engineering, AI systems, and infrastructure roles.</p>
+                    <span class="section-label" data-i18n="ct-label">Let's Connect</span>
+                    <h2 class="section-title" data-i18n="ct-title">Contact</h2>
+                    <p class="section-subtitle" data-i18n="ct-subtitle">Open to backend engineering, AI systems, and infrastructure roles.</p>
                 </div>
 
                 <div class="contact-cards fade-up">
@@ -1360,7 +1425,7 @@
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Malladi Sairam Karthik</p>
+            <p data-i18n="footer-copy">&copy; 2026 Malladi Sairam Karthik</p>
         </div>
     </footer>
 
@@ -1425,6 +1490,183 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // ===== LANGUAGE TOGGLE (EN / JP) =====
+        const i18n = { ja: {
+            // Navigation
+            'nav-projects': 'プロジェクト',
+            'nav-philosophy': '設計思想',
+            'nav-experience': '経歴',
+            'nav-skills': 'スキル',
+            'nav-about': '概要',
+            'nav-contact': 'お問い合わせ',
+            // Hero
+            'hero-badge': '新しい機会を探しています',
+            'hero-subtitle': '信頼性の高いAI駆動システムを構築するソフトウェアエンジニア。バックエンドインフラ、データパイプライン、ML統合サービスの設計に注力し、可観測性・障害対応・実運用環境の制約を重視しています。',
+            'tag-backend': 'バックエンドシステム',
+            'tag-pipeline': 'データパイプライン',
+            'tag-ml': 'ML基盤',
+            'tag-failure': '障害対応設計',
+            'btn-contact': 'お問い合わせ',
+            'btn-projects': '構築したシステムを見る',
+            // Philosophy
+            'phi-label': '設計方針',
+            'phi-title': 'エンジニアリング哲学',
+            'phi-1-title': '知能より信頼性',
+            'phi-1-body': 'モデルの監視、バージョン管理、安全なロールバックができなければ、本番環境には投入しません。可観測性と運用の安全性を最優先し、精度はその上に構築します。',
+            'phi-2-title': 'トレードオフは明示的に',
+            'phi-2-body': 'すべてのシステムはレイテンシ、コスト、精度、運用の複雑さのバランスが必要です。制約を文書化し、代替案を評価し、仮定ではなく既知の境界に基づいて設計します。',
+            'phi-3-title': '障害は前提',
+            'phi-3-body': 'リトライ、デッドレターキュー、フォールバックロジック、ヘルスチェック、構造化メトリクスは最初から組み込まれています。グレースフルデグラデーションか予測不能な障害か——前者を選びます。',
+            // Projects Section
+            'proj-label': '構築したシステム',
+            'proj-title': 'プロジェクト',
+            'proj-subtitle': 'トレードオフを文書化し、測定可能な成果を持つ本番志向のシステム。',
+            // Project 1: Event Analytics Platform
+            'p1-title': 'イベント分析プラットフォーム — 障害分離を備えたイベント駆動型パイプライン',
+            'p1-ctx': '個人プロジェクト · Go + Kafka + PostgreSQL',
+            'p1-desc': '障害時の正確性を重視した本番グレードのイベント駆動型データ取り込みパイプライン。冪等な永続化によるat-least-onceデリバリ、インテリジェントなエラー分類、指数バックオフ付きリトライ、DLQ分離を実装。手動Kafkaオフセット制御によるクラッシュセーフ保証付き。',
+            'p1-h1': 'at-least-onceデリバリ：手動オフセットコミット——DB書き込みまたはDLQルーティング成功後のみコミット。コンシューマ再起動時にコミットされていないメッセージを再配信',
+            'p1-h2': 'INSERT ... ON CONFLICT DO NOTHINGによる冪等な永続化——重複リプレイが安全に処理される設計',
+            'p1-h3': 'インテリジェントなエラー分類：一時的（指数バックオフ+ジッター）、永続的（即時DLQルーティング）、不明（データ損失防止のため一時的として処理）',
+            'p1-h4': 'フォレンジックメタデータ付きDLQ：元のキー/値/オフセット、エラー分類、リトライ回数、障害タイムスタンプを記録',
+            'p1-rv1': '27', 'p1-rl1': 'テスト通過',
+            'p1-rv2': '3', 'p1-rl2': 'エラークラス',
+            'p1-rv3': 'クラッシュセーフ', 'p1-rl3': 'シャットダウン処理',
+            'p1-rv4': 'At-least-once', 'p1-rl4': 'デリバリ保証',
+            // Project 2: Risk Scoring
+            'p2-title': 'コンテンツリスクスコアリングサービス — グレースフルデグラデーション付きステートレス推論',
+            'p2-ctx': '個人プロジェクト · FastAPI + Kubernetes + Prometheus',
+            'p2-desc': '厳格なレイテンシ制約の下で確率的リスクスコアを提供する同期テキストリスクスコアリングマイクロサービス。モデル学習はオフラインでバージョン管理、推論はステートレスで水平スケーラブル。障害はサイレントではなく可視化。',
+            'p2-h1': 'ステートレスFastAPI推論サービス（予測可能なレイテンシ劣化でPodあたり約10同時リクエスト）',
+            'p2-h2': 'オフラインバージョン管理モデル学習と推論の分離、ゲート付きCI/CDパイプラインによるモデルリリース——本番への直接プッシュは禁止',
+            'p2-h3': 'モデルロード失敗時はKubernetesレディネスプローブでトラフィックをブロック、ランタイム推論エラー時はクラッシュではなく劣化レスポンスを返却',
+            'p2-h4': '完全な可観測性：構造化ログ + Prometheusメトリクス、すべての障害モードを計装しアラート可能',
+            'p2-rv1': 'K8sネイティブ', 'p2-rl1': 'デプロイメント',
+            'p2-rv2': 'CI/CDゲート', 'p2-rl2': 'モデルリリース',
+            'p2-rv3': 'グレースフル', 'p2-rl3': 'デグラデーション',
+            'p2-rv4': '可観測', 'p2-rl4': '全障害モード',
+            // Project 3: AI Studio Cam
+            'p3-title': 'AIスタジオカム — セマンティックメモリとランタイムモデル切替を備えたリアルタイムビジョンサービス',
+            'p3-ctx': '研究プロジェクト · Anirban Bhar博士指導',
+            'p3-desc': 'デュアルモデル検出、CLIPベースのセマンティック検索（FAISSベクトルインデックス）、音声駆動インタラクションを備えたリアルタイムAIビジュアルメモリシステム。YOLOv8（80+クラス）とカスタムCNN（10専門クラス）間のランタイムモデルホットスワップをサービス再起動なしでサポート。',
+            'p3-h1': 'デュアルモデルサポート：一般検出用YOLOv8 + 専門クラス用カスタムCNN——再起動なしにランタイムで切替可能',
+            'p3-h2': 'CLIPベースのセマンティックメモリ（FAISSインデックス）：自然言語クエリ（「赤いカップのようなものを見せて」）と時間ベースの検索をサポート',
+            'p3-h3': 'Whisper STT + TTSによる完全な音声インターフェース：ハンズフリーでオブジェクト検索、スナップショット取得、モデル切替、メモリ管理が可能',
+            'p3-h4': 'Optunaハイパーパラメータ最適化、データ拡張、混同行列評価、自動モデル保存を含むCNN学習パイプライン',
+            'p3-rv1': '30–70ms', 'p3-rl1': '推論レイテンシ',
+            'p3-rv2': '94%', 'p3-rl2': 'mAP精度',
+            'p3-rv3': 'セマンティック', 'p3-rl3': 'ビジュアル検索',
+            'p3-rv4': '音声駆動', 'p3-rl4': 'インタラクション',
+            // Project 5: Japanese Language Trainer
+            'p5-title': 'オフラインAI日本語学習トレーナー — ローカルLLMチューター付きフルスタックSRSアプリ',
+            'p5-ctx': '個人プロジェクト · FastAPI + PostgreSQL + Ollama',
+            'p5-desc': '完全オフライン・プライバシー優先の日本語学習アプリケーション。SM-2間隔反復をスクラッチから実装、JLPT語彙・漢字ブラウザ（N5〜N1）を完備、ローカルLLaMA 3.1 70B推論による5モードAIチューター搭載。クラウド依存ゼロ。',
+            'p5-h1': 'SM-2間隔反復エンジン（スクラッチ実装）：Again/Hard/Good/Easyグレーディング、1日の新カード上限、ストリーク追跡、全JLPTレベルのマスタリー進行管理',
+            'p5-h2': '5モードAIチューター（TEACH · QUIZ · EXPLAIN · CORRECT · CHAT）——単純な翻訳を意図的に拒否し、インタラクションを通じて教育',
+            'p5-h3': '非同期FastAPIバックエンド：15+のRESTfulエンドポイント、SSEストリーミングAIレスポンス、Alembicマイグレーション、SQLModel ORM',
+            'p5-h4': 'Piper TTSによるオフライン日本語発音、7日間レビュー予測とレベル別マスタリーメトリクス付きダッシュボード',
+            'p5-rv1': '15+', 'p5-rl1': 'APIエンドポイント',
+            'p5-rv2': 'SM-2', 'p5-rl2': 'SRSエンジン',
+            'p5-rv3': '5モード', 'p5-rl3': 'AIチューター',
+            'p5-rv4': '完全オフライン', 'p5-rl4': 'アーキテクチャ',
+            // Experience
+            'exp-label': '経歴',
+            'exp-title': '経験と学歴',
+            'exp-sub-label': '経験',
+            'exp1-role': 'リサーチ — エッジ推論のための制約付きRL',
+            'exp1-date': '2026年3月 – 4月',
+            'exp1-org': 'Raushan Kumar Singh博士指導 · SRM University, AP',
+            'exp1-b1': 'レイテンシ制約付き産業ビジョンパイプライン（50ms P99バジェット、RTX 3050）における適応的計算制御のためのリアプノフ制約PPOエージェントを設計',
+            'exp1-b2': '3層安全アーキテクチャ：学習済みRLポリシー → コンフォーマル予測証明書（分布フリーP99バウンド） → 決定的フォールバック',
+            'exp1-b3': 'カスケードYOLOv8-Nano + MobileNetV2-UNet TensorRTパイプライン：ランタイム解像度切替（640/480/320）と条件付きセグメンテーション',
+            'exp1-b4': '完全テレメトリ：フレームごとのレイテンシ、GPU使用率、ドリフト検出（KS検定 + CUSUM）、Parquetベース構造化ログ',
+            'exp2-role': 'リサーチインターン — ビジョンシステム',
+            'exp2-date': '2025年6月 – 8月',
+            'exp2-org': 'AIスタジオカム · Anirban Bhar博士指導',
+            'exp2-b1': 'ハイブリッド検出（YOLOv8 + CNN）でp95 SLA 50ms未満のレイテンシ制約ビジョンパイプラインを運用',
+            'exp2-b2': 'FAISSバック検索レイヤーを構築：3msクエリレイテンシとコンポーネント障害時のグレースフルデグラデーション',
+            'exp2-b3': '監視計装：信頼度追跡、レイテンシアラート、YOLOv8のみモードへの自動フォールバック',
+            'exp3-role': 'データエンジニアリングインターン',
+            'exp3-date': '2025年6月 – 7月',
+            'exp3-org': 'NULLCLASS',
+            'exp3-b1': 'ストリーミングデータパイプライン（Kafka → Spark → PostgreSQL + Redis）を構築：データ鮮度30秒未満保証',
+            'exp3-b2': 'Redisキャッシュレイヤーを設計：ダッシュボードp95ロードを1.2秒から180msに削減',
+            'exp3-b3': 'Kafkaリプレイ戦略を実装——インフラ障害後3時間分のメトリクスを復旧',
+            // Education
+            'edu-label': '学歴',
+            'edu-degree': 'コンピュータサイエンス学士（B.Tech）',
+            'edu-school': 'SRM University, AP',
+            'edu-date': '2027年卒業予定 · GPA: 8.68',
+            'edu-d1': '専攻：バックエンドシステム、分散コンピューティング、機械学習、コンピュータビジョン、システム設計',
+            'edu-d2': 'Raushan Kumar Singh博士の指導の下、レイテンシ制約エッジ推論のためのリアプノフ制約RLを研究中',
+            'award-title': '金メダル — TOMIDAI Global Sci Frontiers',
+            'award-desc': '富山大学、2025年 — 早期疾患検出機能を備えたヘルスモニタリングデバイス。',
+            // Skills
+            'sk-label': 'システムレイヤー',
+            'sk-title': 'スキルとツール',
+            'sk-subtitle': 'スタック内の動作レイヤーごとに整理。',
+            'sk1-title': 'アプリケーションレイヤー',
+            'sk1-desc': 'FastAPI、API設計、非同期処理、SSEストリーミング、冪等性パターン、リトライポリシー、DLQハンドリング',
+            'sk2-title': 'データレイヤー',
+            'sk2-desc': 'PostgreSQL、Redis、Kafka、FAISS（ベクトル検索）、MongoDB、SQLModel/Alembic、構造化ログ、Prometheus、Grafana',
+            'sk3-title': 'ML / AIレイヤー',
+            'sk3-desc': 'PyTorch、HuggingFace Transformers & Diffusers、CLIP、YOLO、Ollama（ローカルLLMサービング）、モデルバージョニング、RAGパイプライン、FAISS検索',
+            'sk4-title': 'インフラストラクチャ',
+            'sk4-desc': 'Docker、Kubernetes、CI/CDパイプライン、ヘルス/レディネスプローブ、Prometheusメトリクス、Linux、Git、クラッシュセーフシャットダウンパターン',
+            'sk-lang-label': '言語',
+            'sk-lang-desc': 'Python（本番グレード） · Go（バックエンドサービス） · C++（パフォーマンスクリティカルパス） · SQL（分析 & ETL）',
+            // About
+            'about-label': '私について',
+            'about-title': '概要',
+            'about-p1': '実世界の制約——レイテンシバジェット、限られたコンピュート、障害モード、運用の複雑さ——の下で動作するML統合システムを構築しています。バックエンドインフラ、リアルタイム推論パイプライン、適応的計算制御を専門とし、産業ビジョンとエッジAIへの応用に取り組んでいます。',
+            'about-p2': 'エンジニアリングファーストの思考を信条としています。トレードオフを理解し、決定を文書化し、初日から本番環境を見据えて構築します。すべてのプロジェクトは「これはどのように故障し、故障時に何が起こるか？」という問いから始まります。',
+            'about-p3': '現在SRM University, APでB.Techを取得中。Raushan Kumar Singh博士の指導の下、レイテンシ制約エッジ推論のためのリアプノフ制約強化学習を研究しています。TOMIDAI Global Sci Frontiersワークショップ（富山大学）にて早期疾患検出ヘルスモニタリングデバイスで金メダルを受賞。',
+            'about-i1-label': '研究：',
+            'about-i1-text': '安全なRL、制約付き最適化、エッジ推論、適応的計算制御',
+            'about-i2-label': '言語：',
+            'about-i2-text': 'JLPT N2受験準備中（日本語）',
+            'about-i3-label': '関心：',
+            'about-i3-text': '日本のAI・ロボティクスエコシステム、異文化間の技術コラボレーション',
+            'about-i4-label': 'アプローチ：',
+            'about-i4-text': '本番ファーストの考え方、設計ドキュメント、トレードオフ分析',
+            // Contact
+            'ct-label': 'つながりましょう',
+            'ct-title': 'お問い合わせ',
+            'ct-subtitle': 'バックエンドエンジニアリング、AIシステム、インフラストラクチャの機会を探しています。',
+            // Footer
+            'footer-copy': '\u00a9 2026 Malladi Sairam Karthik'
+        }};
+
+        // Store original English text
+        const originals = {};
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            originals[el.getAttribute('data-i18n')] = el.textContent;
+        });
+
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (lang === 'ja' && i18n.ja[key]) {
+                    el.textContent = i18n.ja[key];
+                } else if (originals[key]) {
+                    el.textContent = originals[key];
+                }
+            });
+
+            document.getElementById('langEn').classList.toggle('active', lang === 'en');
+            document.getElementById('langJp').classList.toggle('active', lang === 'ja');
+            document.getElementById('langEn').setAttribute('aria-checked', lang === 'en');
+            document.getElementById('langJp').setAttribute('aria-checked', lang === 'ja');
+        }
+
+        document.getElementById('langEn').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('langJp').addEventListener('click', () => setLanguage('ja'));
     </script>
 </body>
 </html>
